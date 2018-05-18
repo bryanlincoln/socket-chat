@@ -37,12 +37,12 @@ def server_print():
 
         print("\r\033[1;31m[Server]:\033[0m ", response, "\n\033[1;33m[You]:\033[0m", end='')
 
-serverName = 'localhost'
-serverPort = 6667
+serverName = input("Server: ")
+serverPort = int(input("Port: "))
 connectionSocket = socket(AF_INET, SOCK_STREAM)
 connected = False
 typed_message = ""
-print("Waiting for server (", serverName, ":", serverPort, ")...")
+print("Waiting for server (",serverName,":",serverPort,")...")
 
 while not connected:
     try:

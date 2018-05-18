@@ -37,7 +37,7 @@ def user_print():
 
         print("\r\033[1;33m[Server]:\033[0m ", response, "\n\033[1;31m[You]:\033[0m ", end='')
 
-serverPort = 6667
+serverPort = int(input("Port: "))
 serverSocket = socket(AF_INET, SOCK_STREAM)
 serverSocket.bind(('', serverPort))
 serverSocket.listen(1)
