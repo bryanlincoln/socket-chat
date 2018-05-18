@@ -10,10 +10,38 @@ TEM UM BUG:
     enter, o que ele já tinha digitado é enviado.
 ''' 
 
+def _find_getch():
+    try:
+        import termios
+    except ImportError:
+        # Non-POSIX. Return msvcrt's (Windows') getch.
+        import msvcrt
+        return msvcrt.getch
+
+    # POSIX system. Create and return a getch that manipulates the tty.
+    import sys, tty
+    def _getch():
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(fd)
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
+
+    return _getch
+
 def user_read():
     global connected
     while 1:
-        sentence = input('\033[1;33m[You]:\033[0m ')
+        print("\033[1;33m[You]:\033[0m ")
+        sentence = ""
+        nch = _find_getch()
+        while(nch != "\n") {
+            sentence += nch
+            nch = _find_getch()
+        }
 
         if not connected:
             break
