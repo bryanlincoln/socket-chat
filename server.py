@@ -2,6 +2,10 @@ from socket import *
 import _thread as thd
 import sys
 import time
+import Crypto
+from Crypto.PublicKey import RSA
+from Crypto import Random
+import ast
 
 '''
 TEM UM BUG: 
