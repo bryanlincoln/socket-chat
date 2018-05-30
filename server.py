@@ -26,7 +26,7 @@ def server_read():
         connectionSocket.send(encoded_message)
         
 def user_print():
-    global connnected
+    global connected
     while 1:
         if not connected:
             break
