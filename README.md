@@ -1,5 +1,5 @@
-# Python Secure Socket Chat
-A socket-based Python 3 implementation of a secure chat software.
+# Python Socket Chat
+A socket-based Python 3 implementation of a chat software.
 
 ## How to use
 This project uses exchanging of RSA keys for encryption using the Crypto library. You must install it before running the program.
