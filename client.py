@@ -2,6 +2,10 @@ from socket import *
 import _thread as thd
 import sys
 import time
+import Crypto
+from Crypto.PublicKey import RSA
+from Crypto import Random
+import ast
 
 '''
 TEM UM BUG: 
@@ -12,6 +16,7 @@ TEM UM BUG:
 
 def user_read():
     global connected
+    global server_publicKey
     while 1:
         sentence = input('\033[1;33m[You]:\033[0m ')
 
@@ -22,15 +27,17 @@ def user_read():
             connected = False
             connectionSocket.close()
         
-        encoded_message = bytes(sentence, "utf-8")
+        sentence = bytes(sentence, "utf-8")
+        encoded_message = server_public_key.encrypt(sentence, 32)
         connectionSocket.send(encoded_message)
         
 def server_print():
     global connected
+    global key
     while 1:
         if not connected:
             break
-        response = connectionSocket.recv(1024).decode()
+        response = key.decrypt(connectionSocket.recv(1024).decode())
 
         if response == "":
             continue
@@ -52,6 +59,15 @@ while not connected:
         pass
 
 print("Connection established with ", serverName)
+
+print("Generating and exchanging keys...")
+server_publicKey = RSA.importKey(connectionSocket.recv(1024).decode()) # wait for server's public key
+random_generator = Random.new().read # generate my keys
+key = RSA.generate(1024, random_generator)
+publickey = key.publickey()
+connectionSocket.send(publickey.exportKey()) # send my public key to server
+print("Done.\n")
+
 thd.start_new_thread( user_read, () )
 thd.start_new_thread( server_print, () )
 
