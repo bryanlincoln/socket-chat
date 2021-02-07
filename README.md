@@ -9,5 +9,3 @@ This project uses exchanging of RSA keys for encryption using the Crypto library
 `pip install pycrypt`
 
 After installation, you can run `python3 client.py` or `python3 server.py`.
-
-Any doubts? E-mail me at bryanufg@gmail.com
