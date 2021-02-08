@@ -1,11 +1,13 @@
 # Python Socket Chat
-A socket-based Python 3 implementation of a chat software.
+A simple socket-based Python 3 implementation of a chat software. This project uses exchanging of RSA keys for encryption using the Crypto library.
 
-## How to use
-This project uses exchanging of RSA keys for encryption using the Crypto library. You must install it before running the program.
+## Usage
 
-`pip install cypto`
+- Clone this repository
+- Install [Python 3](https://www.python.org/downloads/)
+- Install requirements with `pip install -r requirements.txt`
+- Run `python3 client.py` and `python3 server.py`.
 
-`pip install pycrypt`
+---
 
-After installation, you can run `python3 client.py` or `python3 server.py`.
+Developed during the Computer Networks course (UFG/INF0182/2018.1).
